@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBX — Strategic Advisory for Buying & Selling Businesses in B.C.</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+:root {
+  --navy: #0D1B2A;
+  --navy2: #1A2E45;
+  --navy3: #243B55;
+  --gold: #B8963E;
+  --gold2: #D4A843;
+  --gold3: #E8C97A;
+  --cream: #F5F0E8;
+  --cream2: #EDE7D9;
+  --white: #FDFCFA;
+  --slate: #5A6472;
+  --mist: #8E9BAA;
+  --fd: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --fb: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--navy);
+  font-family: var(--fb);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; height: 64px;
+  background: rgba(13,27,42,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184,150,62,0.2);
+}
+.nav-logo { font-family: var(--fd); font-size: 1.3rem; color: #FDFCFA; letter-spacing: 0.02em; }
+.nav-logo em { font-style: italic; color: #D4A843; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: #8E9BAA; text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: #D4A843; }
+.nav-cta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; color: #0D1B2A; background: #B8963E; padding: 0.65rem 1.4rem; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: #D4A843; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: #0D1B2A;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 70% at 15% 60%, rgba(184,150,62,0.14) 0%, transparent 55%),
+              radial-gradient(ellipse 50% 80% at 85% 10%, rgba(26,46,69,0.9) 0%, transparent 60%);
+}
+.hero-inner {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  padding: 9rem 5rem 5rem;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  position: relative; z-index: 1;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: #E8C97A; margin-bottom: 2rem;
+}
+.hero-tag::before { content: ''; width: 32px; height: 1px; background: #B8963E; }
+.hero-title {
+  font-family: var(--fd); font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 300; color: #FDFCFA; line-height: 1.08;
+  letter-spacing: -0.01em; margin-bottom: 1.5rem;
+}
+.hero-title em { font-style: italic; color: #D4A843; display: block; }
+.hero-sub { font-size: 1rem; color: #8E9BAA; font-weight: 300; max-width: 500px; line-height: 1.8; margin-bottom: 2.5rem; }
+.hero-rule { width: 60px; height: 1px; background: #B8963E; margin-bottom: 2.5rem; }
+.hero-advisors { display: flex; gap: 3rem; flex-wrap: wrap; }
+.advisor-name { font-family: var(--fd); font-size: 1.1rem; font-weight: 500; color: #FDFCFA; margin-bottom: 0.2rem; }
+.advisor-role { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #B8963E; }
+.advisor-firm { font-size: 0.75rem; color: #8E9BAA; margin-top: 0.1rem; }
+
+.hero-collab {
+  background: rgba(184,150,62,0.08);
+  border-top: 1px solid rgba(184,150,62,0.15);
+  padding: 1.25rem 5rem;
+  display: flex; align-items: center; gap: 1rem;
+  position: relative; z-index: 1;
+}
+.hero-collab span { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: #8E9BAA; }
+.hero-collab strong { color: #D4A843; font-weight: 500; }
+.hero-collab em { margin-left: auto; font-style: italic; font-family: var(--fd); font-size: 0.95rem; color: #5A6472; }
+
+/* SECTIONS */
+.sec { padding: 6rem 5rem; max-width: 1200px; margin: 0 auto; }
+.sec-full { padding: 6rem 0; }
+.sec-full .sec-inner { max-width: 1200px; margin: 0 auto; padding: 0 5rem; }
+.sec-light { background: #FDFCFA; }
+.sec-cream { background: #F5F0E8; }
+.sec-dark { background: #0D1B2A; }
+.sec-dark2 { background: #0A1520; }
+.sec-gold { background: #B8963E; }
+
+.eyebrow {
+  font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: #B8963E; font-weight: 600; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.eyebrow::after { content: ''; width: 28px; height: 1px; background: #B8963E; }
+.eyebrow-light { color: #D4A843; }
+.eyebrow-light::after { background: #D4A843; }
+
+.sh {
+  font-family: var(--fd); font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-weight: 300; line-height: 1.12; margin-bottom: 1rem; color: #0D1B2A;
+}
+.sh em { font-style: italic; color: #B8963E; }
+.sh-light { color: #F5F0E8; }
+.sh-light em { color: #D4A843; }
+
+.lead { font-size: 0.92rem; color: #5A6472; line-height: 1.85; max-width: 620px; margin-bottom: 3rem; }
+.lead-light { color: #8E9BAA; }
+
+/* GOLD RULE */
+.gold-rule { height: 1px; background: linear-gradient(to right, transparent, #B8963E, transparent); opacity: 0.25; }
+
+/* STAT BAND */
+.stat-band {
+  background: #B8963E; padding: 3rem 5rem;
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem;
+}
+.stat-item { text-align: center; }
+.stat-num { font-family: var(--fd); font-size: 3rem; font-weight: 300; color: #0D1B2A; line-height: 1; margin-bottom: 0.4rem; }
+.stat-desc { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: #1A2E45; font-weight: 500; line-height: 1.5; }
+
+/* OPP GRID */
+.opp-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.5px; background: #EDE7D9; border: 1.5px solid #EDE7D9;
+}
+.opp-card {
+  background: #FDFCFA; padding: 2.25rem 2rem;
+  position: relative; overflow: hidden; transition: background 0.25s;
+}
+.opp-card:hover { background: #F5F0E8; }
+.opp-num {
+  position: absolute; top: 1rem; right: 1.25rem;
+  font-family: var(--fd); font-size: 4rem; font-weight: 300; color: #EDE7D9; line-height: 1;
+}
+.opp-accent { width: 20px; height: 2px; background: #B8963E; margin-bottom: 1.25rem; }
+.opp-card h3 { font-family: var(--fd); font-size: 1.2rem; font-weight: 500; color: #0D1B2A; margin-bottom: 0.6rem; }
+.opp-card p { font-size: 0.83rem; color: #5A6472; line-height: 1.75; }
+
+/* ADVISOR */
+.adv-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.portrait {
+  width: 100%; max-width: 340px; aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #1A2E45 0%, #243B55 100%);
+  display: flex; align-items: flex-end; padding: 2rem;
+  position: relative; overflow: hidden;
+}
+.portrait::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 80% at 50% 30%, rgba(184,150,62,0.08) 0%, transparent 60%);
+}
+.portrait-init {
+  font-family: var(--fd); font-size: 6rem; font-weight: 300;
+  color: rgba(255,255,255,0.06); position: absolute; top: 1.5rem; left: 1.5rem; line-height: 1;
+}
+.portrait-tag { position: relative; }
+.portrait-tag h2 { font-family: var(--fd); font-size: 1.4rem; font-weight: 400; color: #FDFCFA; margin-bottom: 0.25rem; }
+.portrait-tag p { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: #D4A843; }
+
+.adv-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+.adv-stat { padding: 1.5rem; border-left: 2px solid #B8963E; background: #F5F0E8; }
+.adv-stat-num { font-family: var(--fd); font-size: 2.5rem; font-weight: 300; color: #0D1B2A; line-height: 1; margin-bottom: 0.3rem; }
+.adv-stat-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: #5A6472; }
+.adv-desc { font-size: 0.88rem; color: #5A6472; line-height: 1.85; margin-bottom: 1.75rem; }
+
+.skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.skill { padding: 1rem; border: 1px solid #EDE7D9; background: #FDFCFA; }
+.skill strong { font-size: 0.75rem; font-weight: 600; color: #0D1B2A; display: block; margin-bottom: 0.2rem; }
+.skill span { font-size: 0.7rem; color: #5A6472; }
+
+.edu { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #EDE7D9; display: flex; flex-direction: column; gap: 0.5rem; }
+.edu-item { font-size: 0.76rem; color: #5A6472; display: flex; align-items: center; gap: 0.75rem; }
+.edu-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #B8963E; flex-shrink: 0; }
+
+/* COLLAB */
+.collab-split { display: grid; grid-template-columns: 1fr 1px 1fr; border: 1px solid rgba(255,255,255,0.07); }
+.collab-col { padding: 3rem; }
+.collab-div { background: rgba(255,255,255,0.07); }
+.collab-col-sub { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #D4A843; margin-bottom: 0.75rem; font-weight: 600; }
+.collab-col h3 { font-family: var(--fd); font-size: 1.3rem; font-weight: 400; color: #F5F0E8; margin-bottom: 1.75rem; }
+.collab-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+.collab-list li { font-size: 0.85rem; color: #8E9BAA; line-height: 1.65; padding-left: 1.25rem; position: relative; }
+.collab-list li::before { content: ''; position: absolute; left: 0; top: 0.65em; width: 5px; height: 1px; background: #B8963E; }
+.collab-quote { grid-column: 1/-1; text-align: center; padding: 2.5rem; border-top: 1px solid rgba(255,255,255,0.06); font-family: var(--fd); font-style: italic; font-size: 1.05rem; color: #8E9BAA; }
+
+/* PROBX PILLARS */
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: rgba(255,255,255,0.05); margin-top: 3rem; }
+.pillar { padding: 2.5rem 2rem; background: rgba(255,255,255,0.03); transition: background 0.25s; }
+.pillar:hover { background: rgba(255,255,255,0.06); }
+.pillar-accent { width: 16px; height: 2px; background: #B8963E; margin-bottom: 1rem; }
+.pillar-icon { font-size: 1.5rem; display: block; margin-bottom: 1rem; }
+.pillar h3 { font-family: var(--fd); font-size: 1.15rem; font-weight: 500; color: #F5F0E8; margin-bottom: 0.6rem; }
+.pillar p { font-size: 0.82rem; color: #8E9BAA; line-height: 1.75; }
+
+/* SERVICES */
+.svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; background: #EDE7D9; border: 1.5px solid #EDE7D9; margin-top: 2.5rem; }
+.svc-card { background: #FDFCFA; padding: 2rem 1.75rem; border-top: 2px solid transparent; transition: border-color 0.25s, background 0.25s; }
+.svc-card:hover { border-top-color: #B8963E; background: #F5F0E8; }
+.svc-num { font-family: var(--fd); font-size: 3rem; font-weight: 300; color: #EDE7D9; line-height: 1; margin-bottom: 0.75rem; }
+.svc-card h3 { font-family: var(--fd); font-size: 1.05rem; font-weight: 500; color: #0D1B2A; margin-bottom: 0.6rem; }
+.svc-card p { font-size: 0.8rem; color: #5A6472; line-height: 1.75; }
+
+/* BUYER CARDS */
+.buyer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+.buyer-card { padding: 2.25rem 2rem; border: 1px solid #EDE7D9; background: #F5F0E8; position: relative; transition: border-color 0.25s, transform 0.25s; }
+.buyer-card:hover { border-color: #B8963E; transform: translateY(-3px); }
+.buyer-num { position: absolute; top: 1.25rem; right: 1.5rem; font-family: var(--fd); font-size: 3.5rem; font-weight: 300; color: #EDE7D9; line-height: 1; }
+.buyer-accent { width: 20px; height: 2px; background: #B8963E; margin-bottom: 1.25rem; }
+.buyer-card h3 { font-family: var(--fd); font-size: 1.1rem; font-weight: 500; color: #0D1B2A; margin-bottom: 0.6rem; }
+.buyer-card p { font-size: 0.82rem; color: #5A6472; line-height: 1.75; }
+
+/* PREP */
+.prep-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+.prep-card { padding: 2rem; border-left: 3px solid #B8963E; background: #FDFCFA; }
+.prep-card h3 { font-family: var(--fd); font-size: 1.1rem; font-weight: 500; color: #0D1B2A; margin-bottom: 1rem; }
+.prep-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.prep-list li { font-size: 0.82rem; color: #5A6472; line-height: 1.65; padding-left: 1.25rem; position: relative; }
+.prep-list li::before { content: '—'; position: absolute; left: 0; color: #B8963E; font-size: 0.7rem; }
+
+/* PROCESS */
+.process { display: grid; grid-template-columns: repeat(7,1fr); gap: 0; margin-top: 3rem; position: relative; }
+.process::before { content: ''; position: absolute; top: 27px; left: 5%; right: 5%; height: 1px; background: linear-gradient(to right, transparent, #B8963E, transparent); opacity: 0.3; }
+.p-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 0.5rem; }
+.p-circle {
+  width: 54px; height: 54px; border-radius: 50%;
+  border: 1.5px solid #B8963E; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1rem; font-family: var(--fd); font-size: 1rem; color: #B8963E;
+  background: #F5F0E8; position: relative; z-index: 1;
+  transition: background 0.25s, color 0.25s;
+}
+.p-step:hover .p-circle { background: #B8963E; color: #0D1B2A; }
+.p-label { font-size: 0.68rem; color: #0D1B2A; line-height: 1.4; font-weight: 500; }
+
+/* SECTORS */
+.sector-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5px; background: #EDE7D9; border: 1.5px solid #EDE7D9; margin-top: 2.5rem; }
+.sector-card { background: #FDFCFA; padding: 2rem 1.5rem; position: relative; overflow: hidden; transition: background 0.25s; }
+.sector-card:hover { background: #F5F0E8; }
+.sector-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #B8963E; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+.sector-card:hover::after { transform: scaleX(1); }
+.sector-icon { font-size: 1.75rem; display: block; margin-bottom: 1.25rem; }
+.sector-card h3 { font-family: var(--fd); font-size: 1.05rem; font-weight: 500; color: #0D1B2A; margin-bottom: 0.6rem; }
+.sector-card p { font-size: 0.78rem; color: #5A6472; line-height: 1.75; }
+
+/* CTA */
+.cta-opts { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; background: rgba(255,255,255,0.06); margin: 3rem 0; }
+.cta-opt { padding: 2rem 1.75rem; background: rgba(255,255,255,0.03); border-top: 2px solid rgba(184,150,62,0.3); transition: background 0.25s, border-color 0.25s; }
+.cta-opt:hover { background: rgba(255,255,255,0.07); border-top-color: #D4A843; }
+.cta-opt h3 { font-family: var(--fd); font-size: 1.1rem; font-weight: 400; color: #F5F0E8; margin-bottom: 0.6rem; }
+.cta-opt p { font-size: 0.8rem; color: #8E9BAA; line-height: 1.75; }
+
+.contact-split { display: grid; grid-template-columns: 1fr 1px 1fr; border: 1px solid rgba(255,255,255,0.07); }
+.contact-col { padding: 2.5rem; }
+.contact-div { background: rgba(255,255,255,0.07); }
+.c-role { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: #D4A843; margin-bottom: 0.25rem; }
+.c-name { font-family: var(--fd); font-size: 1.4rem; font-weight: 400; color: #FDFCFA; margin-bottom: 0.25rem; }
+.c-firm { font-size: 0.8rem; font-weight: 600; color: #F5F0E8; margin-bottom: 1rem; }
+.c-link { display: block; font-size: 0.82rem; color: #8E9BAA; text-decoration: none; line-height: 1.9; transition: color 0.2s; }
+.c-link:hover { color: #D4A843; }
+.c-btn {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+  color: #0D1B2A; background: #B8963E; padding: 0.9rem 1.75rem;
+  text-decoration: none; margin-top: 1.5rem; border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.c-btn:hover { background: #D4A843; transform: translateX(2px); }
+.contact-footer { grid-column: 1/-1; text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: #5A6472; }
+
+/* PAGE FOOTER */
+.page-footer {
+  background: #0D1B2A; padding: 2.5rem 5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(184,150,62,0.15);
+}
+.footer-logo { font-family: var(--fd); font-size: 1.1rem; color: #F5F0E8; }
+.footer-logo em { font-style: italic; color: #D4A843; }
+.footer-txt { font-size: 0.68rem; color: #5A6472; }
+
+/* BACK TOP */
+.back-top {
+  position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px;
+  border-radius: 50%; background: #B8963E; color: #0D1B2A; border: none;
+  cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: background 0.2s, transform 0.2s;
+  z-index: 99; text-decoration: none; opacity: 0; pointer-events: none;
+}
+.back-top:hover { background: #D4A843; transform: translateY(-2px); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+.anim { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.anim.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .sec, .sec-full .sec-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .hero-inner { padding: 7rem 1.5rem 3rem; }
+  .hero-collab { padding: 1.25rem 1.5rem; flex-wrap: wrap; }
+  .hero-collab em { display: none; }
+  .stat-band { grid-template-columns: repeat(2,1fr); padding: 2.5rem 1.5rem; }
+  .opp-grid, .adv-layout, .collab-split, .contact-split, .prep-grid, .buyer-grid { grid-template-columns: 1fr; }
+  .collab-div, .contact-div { display: none; }
+  .svc-grid, .pillars { grid-template-columns: 1fr 1fr; }
+  .process { grid-template-columns: repeat(4,1fr); row-gap: 2rem; }
+  .sector-grid { grid-template-columns: 1fr 1fr; }
+  .cta-opts { grid-template-columns: 1fr; }
+  .page-footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+}
+@media (max-width: 600px) {
+  .svc-grid, .pillars, .sector-grid { grid-template-columns: 1fr; }
+  .process { grid-template-columns: repeat(2,1fr); }
+  .skill-grid, .adv-stats { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Pro<em>BX</em></span>
+  <ul class="nav-links">
+    <li><a href="#opportunity">Opportunity</a></li>
+    <li><a href="#advisors">Advisors</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Begin Consultation</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <p class="hero-tag">British Columbia · Business Advisory</p>
+      <h1 class="hero-title">Strategic Advisory for<br><em>Buying &amp; Selling</em>Businesses in B.C.</h1>
+      <p class="hero-sub">Helping entrepreneurs plan successful business transitions, acquisitions, and growth across British Columbia.</p>
+      <div class="hero-rule"></div>
+      <div class="hero-advisors">
+        <div>
+          <p class="advisor-name">Ruchika Tekkeveetil</p>
+          <p class="advisor-role">Commercial REALTOR®</p>
+          <p class="advisor-firm">RA Realty Alliance Inc.</p>
+        </div>
+        <div>
+          <p class="advisor-name">Michael Hwang</p>
+          <p class="advisor-role">General Counsel &amp; Commercial REALTOR®</p>
+          <p class="advisor-firm">RE/MAX Commercial Advantage</p>
+        </div>
+      </div>
+    </div>
+    <div class="hero-collab">
+      <span>A collaboration created by</span>
+      <strong>Professional Business Exchange Inc.</strong>
+      <em>Advancing Professional Standards in Business Brokerage</em>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITY -->
+<section id="opportunity" style="background:#FDFCFA;">
+  <div class="sec">
+    <p class="eyebrow">The Opportunity in BC</p>
+    <h2 class="sh">Thousands of BC Businesses<br>Will Change <em>Ownership</em></h2>
+    <p class="lead">Across British Columbia, thousands of small and mid-sized businesses will change ownership in the coming decade — yet many owners are not prepared for this critical transition. Successful transactions require professional guidance, careful preparation, and access to qualified buyers and sellers.</p>
+    <div class="opp-grid">
+      <div class="opp-card anim">
+        <span class="opp-num">01</span>
+        <div class="opp-accent"></div>
+        <h3>Approaching Retirement</h3>
+        <p>Many founders are ready to step back but haven't begun planning their exit. Without a clear strategy, years of built-up value can erode rapidly during an unplanned transition.</p>
+      </div>
+      <div class="opp-card anim">
+        <span class="opp-num">02</span>
+        <div class="opp-accent"></div>
+        <h3>No Succession Plan</h3>
+        <p>Without a plan, business value can erode — or deals fall apart entirely. Most business sales that fail do so not from lack of interest, but from lack of preparation.</p>
+      </div>
+      <div class="opp-card anim">
+        <span class="opp-num">03</span>
+        <div class="opp-accent"></div>
+        <h3>Unsure of Value</h3>
+        <p>Most owners don't know what their business is truly worth in today's market. Overestimating or underestimating costs money at every stage of a transaction.</p>
+      </div>
+      <div class="opp-card anim">
+        <span class="opp-num">04</span>
+        <div class="opp-accent"></div>
+        <h3>Growth Through Acquisition</h3>
+        <p>Entrepreneurs looking to expand need professional guidance to acquire the right business — identifying targets, assessing real performance, and structuring sound deals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT BAND -->
+<div class="stat-band">
+  <div class="stat-item"><p class="stat-num">35+</p><p class="stat-desc">Years combined<br>advisory experience</p></div>
+  <div class="stat-item"><p class="stat-num">5,000+</p><p class="stat-desc">Business &amp; real estate<br>transactions completed</p></div>
+  <div class="stat-item"><p class="stat-num">13+</p><p class="stat-desc">Years commercial<br>real estate expertise</p></div>
+  <div class="stat-item"><p class="stat-num">4</p><p class="stat-desc">Industry sectors<br>served province-wide</p></div>
+</div>
+
+<!-- RUCHIKA -->
+<section id="advisors" style="background:#F5F0E8;">
+  <div class="sec">
+    <p class="eyebrow">Meet Your Advisor</p>
+    <div class="adv-layout">
+      <div>
+        <div class="portrait">
+          <span class="portrait-init">RT</span>
+          <div class="portrait-tag">
+            <h2>Ruchika Tekkeveetil</h2>
+            <p>Commercial REALTOR® · RA Realty Alliance Inc.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 class="sh" style="margin-bottom:1rem;">Ruchika<br><em>Tekkeveetil</em></h2>
+        <p class="adv-desc">Commercial REALTOR® with over 13 years of experience across multiple real estate asset classes and a proven track record working with entrepreneurs across BC. Known for her ability to understand the owner's perspective and negotiate fair, win-win outcomes for both buyers and sellers.</p>
+        <div class="adv-stats">
+          <div class="adv-stat"><p class="adv-stat-num">13+</p><p class="adv-stat-label">Years of experience</p></div>
+          <div class="adv-stat"><p class="adv-stat-num">4+</p><p class="adv-stat-label">Asset classes served</p></div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill"><strong>Business Sales</strong><span>Small &amp; mid-sized businesses</span></div>
+          <div class="skill"><strong>Industrial Real Estate</strong><span>Commercial transactions</span></div>
+          <div class="skill"><strong>Development Land</strong><span>Acquisition &amp; disposition</span></div>
+          <div class="skill"><strong>Office &amp; Retail</strong><span>Leasing &amp; sales</span></div>
+        </div>
+        <div class="edu">
+          <div class="edu-item">Self Employment Program — Douglas College</div>
+          <div class="edu-item">Real Estate Studies — UBC Sauder School of Business</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- MICHAEL -->
+<section style="background:#FDFCFA;">
+  <div class="sec">
+    <p class="eyebrow">Meet Your Advisor</p>
+    <div class="adv-layout">
+      <div>
+        <h2 class="sh" style="margin-bottom:1rem;">Michael<br><em>Hwang</em></h2>
+        <p class="adv-desc">Business lawyer and commercial real estate advisor with over 30 years of experience advising entrepreneurs, investors, and business owners across BC and internationally. Transaction experience spans business acquisitions and sales, franchise deals, hospitality and restaurant businesses, commercial real estate, and cross-border transactions.</p>
+        <div class="adv-stats">
+          <div class="adv-stat"><p class="adv-stat-num">35+</p><p class="adv-stat-label">Years of experience</p></div>
+          <div class="adv-stat"><p class="adv-stat-num">5,000+</p><p class="adv-stat-label">Transactions completed</p></div>
+        </div>
+        <div class="skill-grid">
+          <div class="skill"><strong>Business Valuation</strong><span>Financial analysis &amp; benchmarking</span></div>
+          <div class="skill"><strong>Due Diligence</strong><span>Oversight &amp; coordination</span></div>
+          <div class="skill"><strong>Deal Structuring</strong><span>Negotiation &amp; documentation</span></div>
+          <div class="skill"><strong>Market Research</strong><span>Industry benchmarking</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="portrait">
+          <span class="portrait-init">MH</span>
+          <div class="portrait-tag">
+            <h2>Michael Hwang</h2>
+            <p>General Counsel &amp; REALTOR® · RE/MAX</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLABORATIVE MODEL -->
+<section style="background:#0D1B2A;">
+  <div class="sec">
+    <p class="eyebrow eyebrow-light">Our Advisory Model</p>
+    <h2 class="sh sh-light">Complementary Expertise.<br><em>One Unified Team.</em></h2>
+    <p class="lead lead-light">Our partnership brings together complementary expertise — combining market access, industry relationships, and transaction depth to serve clients at every stage of a business transfer.</p>
+    <div class="collab-split">
+      <div class="collab-col">
+        <p class="collab-col-sub">Ruchika Tekkeveetil</p>
+        <h3>Market Access &amp;<br>Relationship Capital</h3>
+        <ul class="collab-list">
+          <li>Business owner outreach &amp; relationship building</li>
+          <li>Industry connections across multiple sectors</li>
+          <li>Transaction sourcing &amp; opportunity identification</li>
+          <li>On-the-ground market intelligence across BC</li>
+        </ul>
+      </div>
+      <div class="collab-div"></div>
+      <div class="collab-col">
+        <p class="collab-col-sub">Michael Hwang</p>
+        <h3>Transaction Depth &amp;<br>Legal Precision</h3>
+        <ul class="collab-list">
+          <li>Business valuation &amp; financial analysis</li>
+          <li>Market research &amp; industry benchmarking</li>
+          <li>Due diligence oversight &amp; coordination</li>
+          <li>Deal structuring, negotiation &amp; documentation</li>
+        </ul>
+      </div>
+      <div class="collab-quote">"Connected through Professional Business Exchange Inc. — a shared commitment to raising professional standards in BC business brokerage."</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBX -->
+<section style="background:#0A1520;">
+  <div class="sec">
+    <p class="eyebrow eyebrow-light">The Organization</p>
+    <h2 class="sh sh-light">Professional Business<br><em>Exchange Inc.</em></h2>
+    <p class="lead lead-light">An initiative dedicated to raising professional standards and improving outcomes in business brokerage across British Columbia.</p>
+    <div class="pillars">
+      <div class="pillar anim"><div class="pillar-accent"></div><span class="pillar-icon">🎓</span><h3>Professional Education</h3><p>Our Business Brokerage Essentials course is accredited by the BCREA for PDP credits and approved by the Law Society of BC for CPD credits.</p></div>
+      <div class="pillar anim"><div class="pillar-accent"></div><span class="pillar-icon">🤝</span><h3>Advisor Collaboration</h3><p>Facilitating structured collaboration between REALTORS®, lawyers, and financial advisors to deliver integrated guidance through every transaction.</p></div>
+      <div class="pillar anim"><div class="pillar-accent"></div><span class="pillar-icon">⚖️</span><h3>Ethical Standards</h3><p>Upholding integrity, confidentiality, and transparency in every business transaction — a standard that exceeds standard brokerage practice.</p></div>
+      <div class="pillar anim"><div class="pillar-accent"></div><span class="pillar-icon">🌐</span><h3>Professional Ecosystem</h3><p>Building a network that supports successful, well-managed business transfers across British Columbia and raises the bar for the entire industry.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SELLER SERVICES -->
+<section id="services" style="background:#F5F0E8;">
+  <div class="sec">
+    <p class="eyebrow">Services for Sellers</p>
+    <h2 class="sh">A Confidential, Value-Maximizing<br><em>Exit Strategy</em></h2>
+    <p class="lead">We assist business owners in planning and executing successful, confidential exits. Our goal is to maximize what you receive while maintaining strict confidentiality throughout every stage.</p>
+    <div class="svc-grid">
+      <div class="svc-card anim"><p class="svc-num">01</p><h3>Confidential Consultation</h3><p>Understand your goals, timeline, and business profile. Every engagement begins with a private, no-obligation conversation.</p></div>
+      <div class="svc-card anim"><p class="svc-num">02</p><h3>Valuation &amp; Market Analysis</h3><p>Establish a realistic and defensible market value for your business, benchmarked against current conditions and comparable transactions.</p></div>
+      <div class="svc-card anim"><p class="svc-num">03</p><h3>Information Package Preparation</h3><p>Professional marketing materials presented only to qualified, pre-screened buyers — protecting your confidentiality at every step.</p></div>
+      <div class="svc-card anim"><p class="svc-num">04</p><h3>Buyer Identification &amp; Negotiation</h3><p>Reach qualified buyers through our network and negotiate on your behalf to achieve the best possible outcome.</p></div>
+      <div class="svc-card anim"><p class="svc-num">05</p><h3>Due Diligence Coordination</h3><p>Manage the full due diligence process, coordinating with legal and financial advisors to keep the transaction on track.</p></div>
+      <div class="svc-card anim"><p class="svc-num">06</p><h3>Closing &amp; Documentation</h3><p>Complete transaction agreements from offer to successful closing — ensuring a smooth, professional transfer of ownership.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- BUYER SERVICES -->
+<section style="background:#FDFCFA;">
+  <div class="sec">
+    <p class="eyebrow">Services for Buyers &amp; Investors</p>
+    <h2 class="sh">The Right Business,<br><em>At the Right Price</em></h2>
+    <p class="lead">We help entrepreneurs and investors identify, evaluate, and acquire the right business — with the expertise to navigate every step and protect your interests throughout.</p>
+    <div class="buyer-grid">
+      <div class="buyer-card anim"><span class="buyer-num">01</span><div class="buyer-accent"></div><h3>Opportunity Identification</h3><p>Access to on-market and off-market businesses that match your acquisition criteria — including opportunities never publicly listed.</p></div>
+      <div class="buyer-card anim"><span class="buyer-num">02</span><div class="buyer-accent"></div><h3>Financial &amp; Operational Analysis</h3><p>Thorough review of financials, operations, and industry benchmarks to assess true business performance — not just what the seller presents.</p></div>
+      <div class="buyer-card anim"><span class="buyer-num">03</span><div class="buyer-accent"></div><h3>Lease &amp; Real Estate Review</h3><p>Evaluation of lease terms, property considerations, and location factors that directly impact business value and long-term viability.</p></div>
+      <div class="buyer-card anim"><span class="buyer-num">04</span><div class="buyer-accent"></div><h3>Deal Structuring &amp; Due Diligence</h3><p>Expert support through offer negotiation, due diligence, and transaction documentation — protecting your interests from first offer to final closing.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PREP -->
+<section style="background:#F5F0E8;">
+  <div class="sec">
+    <p class="eyebrow">Preparing for a Successful Exit</p>
+    <h2 class="sh">The Most Valuable Sales Are<br><em>Planned Well in Advance</em></h2>
+    <p class="lead">Owners who prepare thoroughly consistently achieve better outcomes — higher valuations, smoother transactions, and fewer surprises at closing.</p>
+    <div class="prep-grid">
+      <div class="prep-card anim"><h3>💰 Financial Readiness</h3><ul class="prep-list"><li>Clean, well-organized financial statements for at least 3 years</li><li>Consistent revenue and demonstrated profitability</li><li>Clear separation of owner personal and business expenses</li><li>Tax compliance fully up to date</li></ul></div>
+      <div class="prep-card anim"><h3>⚙️ Operational Stability</h3><ul class="prep-list"><li>Documented systems and standard operating procedures</li><li>Reduced owner dependency — business runs without you</li><li>Key staff retained with appropriate agreements in place</li><li>Supplier and customer relationships documented</li></ul></div>
+      <div class="prep-card anim"><h3>📋 Legal &amp; Structural Readiness</h3><ul class="prep-list"><li>Corporate records, contracts, and licences organized</li><li>Proper documentation in place and fully up to date</li><li>Lease agreements reviewed and assignable where possible</li><li>IP, trademarks, and domains properly registered</li></ul></div>
+      <div class="prep-card anim"><h3>📈 Market Positioning</h3><ul class="prep-list"><li>Clear and credible growth potential articulated</li><li>Strong customer relationships and demonstrable retention</li><li>Online presence and reputation actively managed</li><li>Competitive advantages clearly defined and defensible</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" style="background:#FDFCFA;">
+  <div class="sec">
+    <p class="eyebrow">Our Process</p>
+    <h2 class="sh">A Structured Approach to<br><em>Every Transaction</em></h2>
+    <p class="lead">A professional, structured approach designed to protect client interests, maintain confidentiality, and drive successful outcomes at every stage.</p>
+    <div class="process">
+      <div class="p-step"><div class="p-circle">1</div><p class="p-label">Confidential<br>Consultation</p></div>
+      <div class="p-step"><div class="p-circle">2</div><p class="p-label">Valuation &amp;<br>Positioning</p></div>
+      <div class="p-step"><div class="p-circle">3</div><p class="p-label">Marketing &amp;<br>Buyer Outreach</p></div>
+      <div class="p-step"><div class="p-circle">4</div><p class="p-label">Structured<br>Negotiation</p></div>
+      <div class="p-step"><div class="p-circle">5</div><p class="p-label">Due<br>Diligence</p></div>
+      <div class="p-step"><div class="p-circle">6</div><p class="p-label">Transaction<br>Documentation</p></div>
+      <div class="p-step"><div class="p-circle">7</div><p class="p-label">Successful<br>Closing</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sectors" style="background:#F5F0E8;">
+  <div class="sec">
+    <p class="eyebrow">Industries We Serve</p>
+    <h2 class="sh">Sector Knowledge That<br><em>Drives Better Outcomes</em></h2>
+    <p class="lead">Our advisory work spans a broad range of industries across BC, giving us the sector knowledge and buyer-seller networks needed to execute successful transactions.</p>
+    <div class="sector-grid">
+      <div class="sector-card anim"><span class="sector-icon">🍽️</span><h3>Food &amp; Hospitality</h3><p>Restaurants, quick service restaurants, and franchise businesses of all sizes — including complex multi-location operations.</p></div>
+      <div class="sector-card anim"><span class="sector-icon">🔧</span><h3>Skilled Trades</h3><p>HVAC companies, electrical contractors, and construction service businesses with recurring revenue and real enterprise value.</p></div>
+      <div class="sector-card anim"><span class="sector-icon">🏭</span><h3>Manufacturing</h3><p>Small and mid-sized manufacturers across multiple product categories — with experience navigating equipment, IP, and workforce.</p></div>
+      <div class="sector-card anim"><span class="sector-icon">📦</span><h3>Service Businesses</h3><p>Maintenance companies, specialty service firms, and recurring-revenue service businesses with proven customer bases.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" style="background:#0D1B2A; position:relative; overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 10% 50%, rgba(184,150,62,0.1) 0%,transparent 55%);pointer-events:none;"></div>
+  <div class="sec" style="position:relative;z-index:1;">
+    <p class="eyebrow eyebrow-light">Start the Conversation</p>
+    <h2 class="sh sh-light">Begin With a<br><em>Confidential Consultation</em></h2>
+    <p class="lead lead-light">Whether you are ready to act now or simply exploring your options, we welcome a private, no-obligation conversation. Our goal is to help you understand your position and your opportunities.</p>
+    <div class="cta-opts">
+      <div class="cta-opt"><h3>Selling Your Business</h3><p>Understand what your business is worth and what it takes to achieve a successful, confidential sale in today's BC market.</p></div>
+      <div class="cta-opt"><h3>Acquiring a Business</h3><p>Identify opportunities that match your goals, industry interest, and investment capacity — including off-market businesses.</p></div>
+      <div class="cta-opt"><h3>Expanding Through Acquisition</h3><p>Explore strategic acquisitions to grow your existing business and enter new markets across British Columbia.</p></div>
+    </div>
+    <div class="contact-split">
+      <div class="contact-col">
+        <p class="c-role">General Counsel &amp; Commercial REALTOR®</p>
+        <h3 class="c-name">Michael Hwang</h3>
+        <p class="c-firm">RE/MAX Commercial Advantage</p>
+        <a href="tel:6046175733" class="c-link">C. 604-617-5733</a>
+        <a href="mailto:ceo@ProBX.ca" class="c-link">ceo@ProBX.ca</a>
+        <a href="mailto:ceo@ProBX.ca" class="c-btn">Send a Message →</a>
+      </div>
+      <div class="contact-div"></div>
+      <div class="contact-col">
+        <p class="c-role">Commercial REALTOR®</p>
+        <h3 class="c-name">Ruchika Tekkeveetil</h3>
+        <p class="c-firm">RA Realty Alliance Inc.</p>
+        <a href="tel:7786888480" class="c-link">C. 778-688-8480</a>
+        <a href="mailto:tekkeveetil@gmail.com" class="c-link">tekkeveetil@gmail.com</a>
+        <a href="mailto:tekkeveetil@gmail.com" class="c-btn">Send a Message →</a>
+      </div>
+      <div class="contact-footer">Connected through Professional Business Exchange Inc. — ProBX.ca · British Columbia</div>
+    </div>
+  </div>
+</section>
+
+<footer class="page-footer">
+  <span class="footer-logo">Pro<em>BX</em></span>
+  <span class="footer-txt">Professional Business Exchange Inc. · British Columbia · ProBX.ca</span>
+  <span class="footer-txt">© 2025 All Rights Reserved</span>
+</footer>
+
+<a href="#hero" class="back-top" id="backTop">↑</a>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.anim').forEach(el => io.observe(el));
+
+const bt = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  const show = window.scrollY > 400;
+  bt.style.opacity = show ? '1' : '0';
+  bt.style.pointerEvents = show ? 'all' : 'none';
+});
+</script>
+</body>
+</html>
