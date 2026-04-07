@@ -298,6 +298,51 @@ nav {
 .footer-logo em { font-style: italic; color: #D4A843; }
 .footer-txt { font-size: 0.68rem; color: #5A6472; }
 
+/* HAMBURGER */
+.nav-hamburger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 4px;
+}
+.nav-hamburger span {
+  display: block; height: 1.5px; background: #FDFCFA;
+  transition: transform 0.3s, opacity 0.3s, width 0.3s;
+  transform-origin: center;
+}
+.nav-hamburger span:nth-child(2) { width: 70%; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; width: 100%; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* MOBILE MENU */
+.mobile-menu {
+  display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+  background: rgba(13,27,42,0.99); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(184,150,62,0.2);
+  flex-direction: column; padding: 1rem 0;
+  transform: translateY(-8px); opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  pointer-events: none;
+}
+.mobile-menu.open {
+  transform: translateY(0); opacity: 1; pointer-events: all;
+}
+.mobile-menu a {
+  display: block; padding: 1rem 1.75rem;
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: #8E9BAA; text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: color 0.2s, background 0.2s;
+}
+.mobile-menu a:hover { color: #D4A843; background: rgba(184,150,62,0.05); }
+.mobile-menu .mobile-cta {
+  margin: 1rem 1.75rem 0.5rem;
+  display: block; text-align: center; padding: 0.9rem 1.5rem;
+  background: #B8963E; color: #0D1B2A; font-weight: 500;
+  font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+  border: none; border-bottom: none;
+}
+.mobile-menu .mobile-cta:hover { background: #D4A843; color: #0D1B2A; }
+
 /* BACK TOP */
 .back-top {
   position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px;
@@ -317,7 +362,8 @@ nav {
 @media (max-width: 900px) {
   nav { padding: 0 1.5rem; }
   .nav-links { display: none; }
-  .nav-cta { padding: 0.55rem 1rem; font-size: 0.6rem; letter-spacing: 0.12em; }
+  .nav-hamburger { display: flex; }
+  .nav-cta { display: none; }
   .sec, .sec-full .sec-inner { padding: 4rem 1.5rem; }
   .hero-inner { padding: 7rem 1.5rem 3rem; }
   .hero-collab { padding: 1.25rem 1.5rem; flex-wrap: wrap; gap: 0.5rem; }
@@ -401,7 +447,19 @@ nav {
     <li><a href="#sectors">Sectors</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Begin Consultation</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#opportunity" class="mobile-link">Opportunity</a>
+  <a href="#advisors" class="mobile-link">Advisors</a>
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#process" class="mobile-link">Process</a>
+  <a href="#sectors" class="mobile-link">Sectors</a>
+  <a href="#contact" class="mobile-cta mobile-link">Begin Consultation</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -730,6 +788,35 @@ window.addEventListener('scroll', () => {
   const show = window.scrollY > 400;
   bt.style.opacity = show ? '1' : '0';
   bt.style.pointerEvents = show ? 'all' : 'none';
+});
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function openMenu() {
+  hamburger.classList.add('open');
+  mobileMenu.style.display = 'flex';
+  requestAnimationFrame(() => mobileMenu.classList.add('open'));
+}
+function closeMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  mobileMenu.addEventListener('transitionend', () => {
+    if (!mobileMenu.classList.contains('open')) mobileMenu.style.display = 'none';
+  }, { once: true });
+}
+
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+});
+
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
+
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
 });
 </script>
 </body>
