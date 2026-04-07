@@ -317,23 +317,75 @@ nav {
 @media (max-width: 900px) {
   nav { padding: 0 1.5rem; }
   .nav-links { display: none; }
-  .sec, .sec-full .sec-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .nav-cta { padding: 0.55rem 1rem; font-size: 0.6rem; letter-spacing: 0.12em; }
+  .sec, .sec-full .sec-inner { padding: 4rem 1.5rem; }
   .hero-inner { padding: 7rem 1.5rem 3rem; }
-  .hero-collab { padding: 1.25rem 1.5rem; flex-wrap: wrap; }
+  .hero-collab { padding: 1.25rem 1.5rem; flex-wrap: wrap; gap: 0.5rem; }
   .hero-collab em { display: none; }
-  .stat-band { grid-template-columns: repeat(2,1fr); padding: 2.5rem 1.5rem; }
-  .opp-grid, .adv-layout, .collab-split, .contact-split, .prep-grid, .buyer-grid { grid-template-columns: 1fr; }
+  .hero-advisors { gap: 1.75rem; }
+  .stat-band { grid-template-columns: repeat(2,1fr); padding: 2.5rem 1.5rem; gap: 1.5rem; }
+  .opp-grid, .collab-split, .contact-split, .prep-grid, .buyer-grid { grid-template-columns: 1fr; }
+  .adv-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .portrait { max-width: 100%; aspect-ratio: 4/3; }
   .collab-div, .contact-div { display: none; }
   .svc-grid, .pillars { grid-template-columns: 1fr 1fr; }
-  .process { grid-template-columns: repeat(4,1fr); row-gap: 2rem; }
   .sector-grid { grid-template-columns: 1fr 1fr; }
   .cta-opts { grid-template-columns: 1fr; }
   .page-footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+  /* Process: 4-col on tablet */
+  .process { grid-template-columns: repeat(4,1fr); row-gap: 2rem; }
+  .process::before { top: 27px; }
 }
+
 @media (max-width: 600px) {
+  .sec, .sec-full .sec-inner { padding: 3rem 1.25rem; }
   .svc-grid, .pillars, .sector-grid { grid-template-columns: 1fr; }
-  .process { grid-template-columns: repeat(2,1fr); }
   .skill-grid, .adv-stats { grid-template-columns: 1fr 1fr; }
+  .opp-grid { grid-template-columns: 1fr; }
+  .stat-band { grid-template-columns: 1fr 1fr; gap: 1.25rem; padding: 2rem 1.25rem; }
+  .stat-num { font-size: 2.25rem; }
+
+  /* Process: vertical stepper on mobile */
+  .process {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 2rem;
+  }
+  .process::before { display: none; }
+  .p-step {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0 0 2rem 0;
+    gap: 1.25rem;
+    position: relative;
+  }
+  .p-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 26px;
+    top: 54px;
+    bottom: 0;
+    width: 1px;
+    background: rgba(184,150,62,0.35);
+  }
+  .p-circle { flex-shrink: 0; margin-bottom: 0; }
+  .p-label { padding-top: 1rem; font-size: 0.82rem; line-height: 1.5; }
+
+  /* Contact cards full-width on mobile */
+  .contact-col { padding: 2rem 1.25rem; }
+  .c-btn { width: 100%; justify-content: center; }
+
+  /* Collab columns */
+  .collab-col { padding: 2rem 1.25rem; }
+
+  /* Hero tweaks */
+  .hero-advisors { flex-direction: column; gap: 1.25rem; }
+  .hero-collab { flex-direction: column; align-items: flex-start; }
+
+  /* Portrait smaller on phone */
+  .portrait { aspect-ratio: 3/2; }
 }
 </style>
 </head>
